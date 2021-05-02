@@ -24,8 +24,8 @@ describe('UpdateProfile', () => {
       user_id: user.id,
     });
 
-    expect(profile.name).toBe('Luis M.');
-    expect(profile.email).toBe('teste@teste.com');
+    expect(profile.name).toBe('Luis Moraes');
+    expect(profile.email).toBe('luis@teste.com');
   });
 
   it('should not be able show the profile from non-existing user', async () => {
