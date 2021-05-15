@@ -1,21 +1,25 @@
 import AppError from '@shared/errors/AppError';
 
 import FakeNotificationsRepository from '@modules/notifications/repositories/fakes/FakeNotificationsRepository';
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 import FakeAppointmentsRepository from '../repositories/fakes/FakeAppointmentsRepository';
 import CreateAppointmentService from './CreateAppointmentService';
 
 let fakeAppointmentRepository: FakeAppointmentsRepository;
+let fakeCacheProvider: FakeCacheProvider;
 let fakeNotificationsRepository: FakeNotificationsRepository;
 let createAppointment: CreateAppointmentService;
 
 describe('CreateAppointment', () => {
   beforeEach(() => {
     fakeAppointmentRepository = new FakeAppointmentsRepository();
+    fakeCacheProvider = new FakeCacheProvider();
     fakeNotificationsRepository = new FakeNotificationsRepository();
 
     createAppointment = new CreateAppointmentService(
       fakeAppointmentRepository,
       fakeNotificationsRepository,
+      fakeCacheProvider,
     );
   });
 
@@ -35,7 +39,7 @@ describe('CreateAppointment', () => {
   });
 
   it('should not be able a create two appointments on the same time', async () => {
-    const appointmentDate = new Date(2021, 4, 10, 11);
+    const appointmentDate = new Date(2021, 4, 30, 11);
 
     await createAppointment.execute({
       user_id: 'user-id',
